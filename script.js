@@ -6,21 +6,20 @@ const possibleMoves = (["rock", "paper","scissors"])
 
 var computerSelection = computerPlay(possibleMoves)
 
-var playerSelection = "";
-
-function chooseYourMove () {
-    let playerChoice = prompt("Rock, paper or scissors?");
-        if (playerChoice.toLowerCase() == "rock") {
-            playerSelection = "rock";
-        } else if (playerChoice.toLowerCase() == "paper") {
-            playerSelection = "paper";
-        } else if (playerChoice.toLowerCase() == "scissors") {
-            playerSelection = "scissors"
-        } else {
-            alert ("Incorrect input. This field only accepts rock paper scissors. Please try again.");
-            return chooseYourMove();
-        }
-}
+// var playerSelection = "";
+// function chooseYourMove () {
+//     let playerChoice = prompt("Rock, paper or scissors?");
+//         if (playerChoice.toLowerCase() == "rock") {
+//             playerSelection = "rock";
+//         } else if (playerChoice.toLowerCase() == "paper") {
+//             playerSelection = "paper";
+//         } else if (playerChoice.toLowerCase() == "scissors") {
+//             playerSelection = "scissors"
+//         } else {
+//             alert ("Incorrect input. This field only accepts rock paper scissors. Please try again.");
+//             return chooseYourMove();
+//         }
+// }
 
 var playerScore = 0;
 var computerScore = 0;
@@ -31,8 +30,14 @@ function playRound(playerSelection, computerSelection) {
 
     console.log(playerSelection);
     console.log(computerSelection);
-
-    if (playerSelection == computerSelection) {
+    console.log(playerScore)
+    console.log(computerScore)
+    if (playerScore == 5) {
+        alert('Youre the winner!!! Refresh the page to play again.')
+    } else if (computerScore == 5) {
+        alert('Computer wins. Refresh the page to play again.')
+    }
+    else if (playerSelection == computerSelection) {
          return 'its a draw';
     } else if (playerSelection == "rock" && computerSelection == "scissors") {
         playerScore ++ ;
@@ -70,4 +75,51 @@ function game() {
 }
 
 
-console.log(game())
+const btn = document.querySelector('#rock');
+btn.addEventListener('click', () => {
+    playerSelection = "rock";
+    content.textContent = playRound(playerSelection, computerPlay(possibleMoves));
+
+    score.textContent = "Your score:" + playerScore;
+    pcscore.textContent = "Computer score" + computerScore;
+    winner
+  });
+
+const btn2 = document.querySelector('#paper');
+btn2.addEventListener('click', () => {
+    playerSelection = "paper";
+    content.textContent = playRound(playerSelection, computerPlay(possibleMoves));
+
+    score.textContent = "Your score:" + playerScore;
+    pcscore.textContent = "Computer score" + computerScore;
+    winner
+  });
+
+const btn3 = document.querySelector('#scissors');
+btn3.addEventListener('click', () => {
+    playerSelection = "scissors";
+    content.textContent = playRound(playerSelection, computerPlay(possibleMoves));
+
+    score.textContent = "Your score:" + playerScore;
+    pcscore.textContent = "Computer score" + computerScore;
+    winner
+  });
+
+const container = document.querySelector('#container');
+
+const content = document.createElement('div');
+content.classList.add('content');
+
+const score = document.createElement('div');
+score.classList.add('score');
+
+const pcscore = document.createElement('div');
+pcscore.classList.add('pcscore');
+
+const winner = document.createElement('div');
+winner.classList.add('winner');
+
+container.appendChild(content);
+container.appendChild(score);
+container.appendChild(pcscore);
+container.appendChild(winner);
